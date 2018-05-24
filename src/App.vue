@@ -1,60 +1,48 @@
 <template>
   <div id="app">
-    <img src="./assets/logo.png">
-    <h1>{{ msg }}</h1>
-    <h2>Essential Links</h2>
-    <ul>
-      <li><a href="https://vuejs.org" target="_blank">Core Docs</a></li>
-      <li><a href="https://forum.vuejs.org" target="_blank">Forum</a></li>
-      <li><a href="https://chat.vuejs.org" target="_blank">Community Chat</a></li>
-      <li><a href="https://twitter.com/vuejs" target="_blank">Twitter</a></li>
-    </ul>
-    <h2>Ecosystem</h2>
-    <ul>
-      <li><a href="http://router.vuejs.org/" target="_blank">vue-router</a></li>
-      <li><a href="http://vuex.vuejs.org/" target="_blank">vuex</a></li>
-      <li><a href="http://vue-loader.vuejs.org/" target="_blank">vue-loader</a></li>
-      <li><a href="https://github.com/vuejs/awesome-vue" target="_blank">awesome-vue</a></li>
-    </ul>
+
+    <div v-for="group in scheduleDateGroups" class="card mb-2">
+      <h3 class="card-header d-flex justify-content-between align-items-center" :class="group.pastClass">
+        {{ group.date.format('ddd, MMM D YYYY') }}
+        <small v-if="group.quarterly" class="text-warning">
+          Quarterly
+        </small>
+      </h3>
+
+      <div v-if="group.available" class="card-body">
+        <strong>
+          Available
+        </strong>
+      </div>
+
+      <div v-else v-for="schedule in group.schedules" class="card-body border border-light">
+        <p class="card-text">
+          {{ schedule.excerpt }}
+        </p>
+        <ul class="mb-0">
+          <li v-if="schedule.pending">
+            <em>Pending submission of COIN request.</em>
+          </li>
+          <li v-if="schedule.type">
+            Type:
+            {{ schedule.type }}
+          </li>
+          <li v-if="schedule.commissioner">
+            Commissioner:
+            {{ schedule.commissioner }}
+          </li>
+        </ul>
+      </div>
+    </div>
+
   </div>
 </template>
 
 <script>
+import { storeMixin } from './store'
+
 export default {
   name: 'app',
-  data () {
-    return {
-      msg: 'Welcome to Your Vue.js App'
-    }
-  }
+  mixins: [storeMixin]
 }
 </script>
-
-<style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-
-h1, h2 {
-  font-weight: normal;
-}
-
-ul {
-  list-style-type: none;
-  padding: 0;
-}
-
-li {
-  display: inline-block;
-  margin: 0 10px;
-}
-
-a {
-  color: #42b983;
-}
-</style>
