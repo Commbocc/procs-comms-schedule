@@ -1,5 +1,5 @@
 <template>
-  <div id="app">
+  <div id="Schedule">
 
     <div v-for="group in scheduleDateGroups" class="card mb-2">
       <h3 class="card-header d-flex justify-content-between align-items-center" :class="group.pastClass">
@@ -39,10 +39,13 @@
 </template>
 
 <script>
-import { storeMixin } from './store'
+import { storeMixin } from '../store'
 
 export default {
-  name: 'app',
-  mixins: [storeMixin]
+  name: 'Schedule',
+  mixins: [storeMixin],
+  mounted () {
+    this.fetchSchedules()
+  }
 }
 </script>

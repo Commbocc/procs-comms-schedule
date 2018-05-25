@@ -8,8 +8,8 @@ export default {
   },
   actions: {
     fetchSchedules ({ commit }) {
-      fetch(Schedule.url).then(res => res.json()).then(schedules => {
-        commit('setSchedules', schedules.feed.entry.map(x => new Schedule(x)))
+      fetch(Schedule.url).then(res => res.json()).then(data => {
+        commit('setSchedules', data.feed.entry.map(x => new Schedule(x)))
       })
     }
   },

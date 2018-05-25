@@ -5,11 +5,16 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>procs-comms-schedule</title>
   <link rel="stylesheet" href="https://commbocc.github.io/coin-v3-styles/dist/static/css/app.css">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
 </head>
 <body>
 
   <section class="pageStyles">
-    <div id="app"></div>
+    <div id="schedule"></div>
+  </section>
+
+  <section class="pageStyles">
+    <div id="requests"></div>
   </section>
 
   <!-- include babel-polyfill for IE11 Promise support -->
@@ -18,8 +23,10 @@
   <script src="https://cdn.jsdelivr.net/npm/whatwg-fetch@2.0.3/fetch.min.js"></script>
   <!-- sets HcProcsComms as a variable -->
   <script src="./dist/build.js"></script>
+
   <script type="text/javascript">
-  new HcProcsComms.Schedule().$mount('#app')
+  new HcProcsComms.schedule().$mount('#schedule')
+  new HcProcsComms.requests().$mount('#requests')
   </script>
 </body>
 </html>

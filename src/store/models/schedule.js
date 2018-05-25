@@ -3,7 +3,7 @@ import moment from 'moment'
 
 export default class Schedule {
   constructor (data) {
-    this.date = moment(data.gsx$moment.$t, 'MM-DD-YYYY')
+    this.date = moment(data.gsx$date.$t, 'MM-DD-YYYY')
     this.type = data.gsx$type.$t
     this.commissioner = data.gsx$commissioner.$t
     this.pending = (data.gsx$pending.$t === 'TRUE') ? true : false

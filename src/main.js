@@ -1,13 +1,18 @@
 import Vue from 'vue'
-import App from './App.vue'
+
+import Schedule from './components/Schedule.vue'
+import Requests from './components/Requests.vue'
 
 import store from './store'
 
-let Schedule = Vue.extend({
+let schedule = Vue.extend({
   store,
-  extends: App
+  extends: Schedule
 })
 
-store.dispatch('fetchSchedules')
+let requests = Vue.extend({
+  store,
+  extends: Requests
+})
 
-export { Schedule }
+export { schedule, requests }
