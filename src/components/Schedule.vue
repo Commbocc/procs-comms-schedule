@@ -4,7 +4,7 @@
       <!--  -->
       <tr>
         <th>Date &amp; Type</th>
-        <th>Excerpt</th>
+        <th>Name</th>
         <th>Details</th>
       </tr>
     </thead>
@@ -19,7 +19,7 @@
         <td>
           <ul class="mb-0">
             <li v-if="item.Quarterly">
-              <strong>Quarterly</strong>
+              <strong>Quarterly Awards</strong>
             </li>
             <li v-if="schedule.Pending">
               <em>Pending submission of COIN request.</em>
