@@ -31,6 +31,10 @@
       <div id="requests"></div>
     </section>
 
-    <script type="module" src="/src/main.js"></script>
+    <script src="./hc-procs-comms.umd.js"></script>
+    <script>
+      HcProcsComms.Requests().mount('#requests')
+      HcProcsComms.Schedule().mount('#schedule')
+    </script>
   </body>
 </html>

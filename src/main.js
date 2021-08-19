@@ -1,18 +1,16 @@
-import Vue from 'vue'
+import { createApp } from 'vue'
 
-import Schedule from './components/Schedule.vue'
-import Requests from './components/Requests.vue'
+import RequestsComponent from './components/Requests.vue'
+import ScheduleComponent from './components/Schedule.vue'
 
-import store from './store'
+const HcProcsComms = {
+  Requests: (props = {}) => createApp(RequestsComponent, props),
+  Schedule: (props = {}) => createApp(ScheduleComponent, props),
+}
 
-let schedule = Vue.extend({
-  store,
-  extends: Schedule
-})
+export default HcProcsComms
 
-let requests = Vue.extend({
-  store,
-  extends: Requests
-})
-
-export { schedule, requests }
+if (import.meta.env.DEV) {
+  HcProcsComms.Requests().mount('#requests')
+  HcProcsComms.Schedule().mount('#schedule')
+}

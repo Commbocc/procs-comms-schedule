@@ -1,51 +1,48 @@
 <template>
-  <div id="Schedule">
+  <table class="table table-striped table-bordered table-responsive table-sm">
+    <thead>
+      <!--  -->
+      <tr>
+        <th>Date &amp; Type</th>
+        <th>Excerpt</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr v-for="{ id, fields: item } in schedule.data" :key="id">
+        <td>
+          {{ item.Name }}
+        </td>
+        <td>
+          {{ item.Excerpt }}
+        </td>
+        <td>
+          <ul class="mb-0">
+            <li v-if="item.Quarterly">
+              <strong>Quarterly</strong>
+            </li>
+            <li v-if="schedule.Pending">
+              <em>Pending submission of COIN request.</em>
+            </li>
+            <li v-if="item.Commissioner">
+              Commissioner:
+              {{ item.Commissioner }}
+            </li>
+          </ul>
 
-    <div v-for="group in scheduleDateGroups" class="card mb-2">
-      <h3 class="card-header d-flex justify-content-between align-items-center" :class="group.pastClass">
-        {{ group.date.format('ddd, MMM D YYYY') }}
-        <small v-if="group.quarterly" class="text-warning">
-          Quarterly
-        </small>
-      </h3>
-
-      <div v-if="group.available" class="card-body">
-        <strong>
-          Available
-        </strong>
-      </div>
-
-      <div v-else v-for="schedule in group.schedules" class="card-body border border-light">
-        <p class="card-text">
-          {{ schedule.excerpt }}
-        </p>
-        <ul class="mb-0">
-          <li v-if="schedule.pending">
-            <em>Pending submission of COIN request.</em>
-          </li>
-          <li v-if="schedule.type">
-            Type:
-            {{ schedule.type }}
-          </li>
-          <li v-if="schedule.commissioner">
-            Commissioner:
-            {{ schedule.commissioner }}
-          </li>
-        </ul>
-      </div>
-    </div>
-
-  </div>
+          <!-- <pre>{{ item }}</pre> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
 </template>
 
 <script>
-import { storeMixin } from '../store'
-
+import { schedule, fetchSchedule } from '../lib'
 export default {
-  name: 'Schedule',
-  mixins: [storeMixin],
-  mounted () {
-    this.fetchSchedules()
-  }
+  setup() {
+    fetchSchedule()
+    return { schedule }
+  },
 }
 </script>
